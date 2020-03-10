@@ -47,8 +47,8 @@ export class ClienteService {
       );
   }
 
-  updateCliente(cliente: Cliente): Observable<Cliente> {
-    return this.http.put<Cliente>(`${this.URL_ENDPOINT}/${cliente.id}`, cliente, {headers: this.httpHeaders})
+  updateCliente(cliente: Cliente): Observable<any> {
+    return this.http.put<any>(`${this.URL_ENDPOINT}/${cliente.id}`, cliente, {headers: this.httpHeaders})
       .pipe(
         catchError(e => {
           console.error(e.error.mensaje);
