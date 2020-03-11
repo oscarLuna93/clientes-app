@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {formatDate} from '@angular/common';
 import { Cliente } from './cliente.js';
 import { Observable, of, throwError} from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
@@ -18,7 +19,15 @@ export class ClienteService {
 
   getClientes(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(this.URL_ENDPOINT).pipe(
-      map((response) => response as Cliente[])
+      map(response => {
+        let clientes = response as Cliente[];
+
+        return clientes.map(cliente => {
+          cliente.nombre = cliente.nombre.toUpperCase();
+          cliente.createAt = formatDate(cliente.createAt, 'dd-MM-yyyy', 'en-US');
+          return cliente;
+        });
+      })
     );
   }
 
