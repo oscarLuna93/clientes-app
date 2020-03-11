@@ -10,6 +10,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormComponent } from './clientes/form.component'
 import { FormsModule } from '@angular/forms'
+import localeMX from '@angular/common/locales/es-MX';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localeMX, 'es');
 
 const routes: Routes = [
   {path: '', redirectTo: '/clientes', pathMatch: 'full'},
