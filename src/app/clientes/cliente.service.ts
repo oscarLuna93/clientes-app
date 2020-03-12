@@ -26,7 +26,7 @@ export class ClienteService {
           cliente.nombre = cliente.nombre.toUpperCase();
           
           let datePipe = new DatePipe('es');
-          cliente.createAt = datePipe.transform(cliente.createAt, 'fullDate');
+          //cliente.createAt = datePipe.transform(cliente.createAt, 'fullDate');
 
           return cliente;
         });
