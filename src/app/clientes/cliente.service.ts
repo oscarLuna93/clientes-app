@@ -3,7 +3,7 @@ import { DatePipe } from '@angular/common';
 import { Cliente } from './cliente.js';
 import { Observable, of, throwError} from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { map, catchError } from 'rxjs/operators'
+import { map, tap, catchError } from 'rxjs/operators'
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 
@@ -19,6 +19,13 @@ export class ClienteService {
 
   getClientes(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(this.URL_ENDPOINT).pipe(
+      tap(response => {
+        console.log("primer tap");
+        let clientes = response as Cliente[];
+        clientes.forEach(cliente => {
+          console.log(cliente.nombre);
+        })
+      }),
       map(response => {
         let clientes = response as Cliente[];
 
@@ -30,6 +37,12 @@ export class ClienteService {
 
           return cliente;
         });
+      }),
+      tap(response => {
+        console.log("segundo tap");
+        response.forEach(cliente => {
+          console.log(cliente.nombre);
+        })
       })
     );
   }
