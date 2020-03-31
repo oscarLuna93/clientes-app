@@ -13,8 +13,9 @@ export class ClientesComponent implements OnInit{
   constructor(private clienteService: ClienteService) {}
 
   ngOnInit() {
-    this.clienteService.getClientes().subscribe(
-      clientes => this.clientes = clientes
+    let page = 0;
+    this.clienteService.getClientes(page).subscribe(
+      response => this.clientes = response.content as Cliente[]
     );
   }
 
