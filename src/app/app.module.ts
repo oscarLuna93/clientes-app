@@ -13,6 +13,10 @@ import { FormsModule } from '@angular/forms'
 import localeMX from '@angular/common/locales/es-MX';
 import { registerLocaleData } from '@angular/common';
 import { PaginatorComponent } from './paginator/paginator.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDatepickerModule, MAT_DATE_LOCALE } from '@angular/material';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+
 
 registerLocaleData(localeMX, 'es');
 
@@ -39,9 +43,12 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
+    MatDatepickerModule, MatMomentDateModule
   ],
-  providers: [{provide: LOCALE_ID, useValue: 'es'}],
+  providers: [{provide: LOCALE_ID, useValue: 'es'},
+              {provide: MAT_DATE_LOCALE, useValue: 'es-MX'},],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
