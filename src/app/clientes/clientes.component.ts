@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router'
 export class ClientesComponent implements OnInit{
   clientes: Cliente[];
   paginador: any;
+  clienteSeleccionado: Cliente;
 
   constructor(private clienteService: ClienteService
               ,private activatedRoute: ActivatedRoute) {}
@@ -53,5 +54,9 @@ export class ClientesComponent implements OnInit{
         )
       }
     })
+  }
+
+  abrirModal(cliente: Cliente) {
+    this.clienteSeleccionado = cliente;
   }
 }
