@@ -26,8 +26,8 @@ export class AuthService {
   public get token(): string {
     if(this._token != null) {
       return this._token;
-    } else if (this._usuario == null && sessionStorage.getItem('usuario') != null) {
-      this._token = sessionStorage.getItem('usuario');
+    } else if (this._usuario == null && sessionStorage.getItem('token') != null) {
+      this._token = sessionStorage.getItem('token');
       return this._token;
     }
     return null;
@@ -78,5 +78,11 @@ export class AuthService {
     }
 
     return false;
+  }
+
+  logout(): void {
+    this._token = null;
+    this._usuario = null;
+    sessionStorage.clear();
   }
 }
