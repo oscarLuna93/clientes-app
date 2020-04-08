@@ -4,6 +4,7 @@ import { ClienteService } from './cliente.service.js';
 import Swal from 'sweetalert2';
 import { ActivatedRoute } from '@angular/router'
 import { ModalService } from './detalle/modal.service';
+import { AuthService } from '../usuarios/auth.service.js';
 
 @Component({
   selector: 'app-clientes',
@@ -14,8 +15,9 @@ export class ClientesComponent implements OnInit{
   paginador: any;
   clienteSeleccionado: Cliente;
 
-  constructor(private modalService: ModalService,
-              private clienteService: ClienteService
+  constructor(private modalService: ModalService
+              ,private clienteService: ClienteService
+              ,private authService: AuthService
               ,private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
