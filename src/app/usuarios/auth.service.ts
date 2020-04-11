@@ -26,7 +26,7 @@ export class AuthService {
   public get token(): string {
     if(this._token != null) {
       return this._token;
-    } else if (this._usuario == null && sessionStorage.getItem('token') != null) {
+    } else if (this._token == null && sessionStorage.getItem('token') != null) {
       this._token = sessionStorage.getItem('token');
       return this._token;
     }
@@ -35,9 +35,9 @@ export class AuthService {
 
   login(usuario:Usuario):Observable<any> {
     const urlEndPoint = 'http://localhost:8080/oauth/token';
-    const credencialess = btoa('angularapp' + ':' + '12345');
+    const credenciales = btoa('angularapp' + ':' + '12345');
     const httpHeaders = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'
-                            ,'authorization': 'Basic ' + credencialess});
+                            ,'authorization': 'Basic ' + credenciales});
     
     let params = new URLSearchParams();
     params.set('grant_type', 'password');
@@ -91,5 +91,7 @@ export class AuthService {
     this._token = null;
     this._usuario = null;
     sessionStorage.clear();
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('usuario');
   }
 }
