@@ -7,7 +7,7 @@ import { HeaderComponent } from './header/header.component';
 import { DirectivaComponent } from './directiva/directiva.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormComponent } from './clientes/form.component'
 import { FormsModule } from '@angular/forms'
 import localeMX from '@angular/common/locales/es-MX';
@@ -20,6 +20,7 @@ import { DetalleComponent } from './clientes/detalle/detalle.component';
 import { LoginComponent } from './usuarios/login.component';
 import { AuthGuard } from './usuarios/guards/auth.guard';
 import { RoleGuard } from './usuarios/guards/role.guard';
+import { TokenInterceptor } from './usuarios/interceptors/token.interceptor';
 
 
 registerLocaleData(localeMX, 'es');
@@ -48,14 +49,15 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
+    HttpClientModule, 
     FormsModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     MatDatepickerModule, MatMomentDateModule
   ],
   providers: [{provide: LOCALE_ID, useValue: 'es'},
-              {provide: MAT_DATE_LOCALE, useValue: 'es-MX'},],
+              {provide: MAT_DATE_LOCALE, useValue: 'es-MX'},
+              {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
