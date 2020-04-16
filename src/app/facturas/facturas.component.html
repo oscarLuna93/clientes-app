@@ -51,6 +51,7 @@
             <th>Precio</th>
             <th>Cantidad</th>
             <th>Total</th>
+            <th>Eliminar</th>
           </thead>
           <tbody>
             <tr *ngFor="let item of factura.items">
@@ -58,12 +59,13 @@
               <td>{{item.producto.precio}}</td>
               <td><input type="number" value="{{item.cantidad}}" class="form-control col-sm-4" (change)="actualizarCantidad(item.producto.id, $event)"></td>
               <td>{{item.calcularImporte()}}</td>
+              <td><button class="btn btn-danger btn-sm" type="button" 
+                (click)="eliminarItemFactura(item.producto.id)">X</button></td>
             </tr>
           </tbody>
         </table>
 
         <div class="form-group row">
-          <label for="" class="col-sm-2 col-form-label"></label>
           <div class="col-sm-6">
             <input type="submit" value="Crear factura" class="btn btn-secondary" />
           </div>
